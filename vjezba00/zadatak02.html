@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drop down</title>
+    <style>
+        table,
+        tr,
+        th,
+        td {
+            border: 1px black solid;
+        }
+
+        th {
+            text-align: left;
+        }
+    </style>
+</head>
+
+<body>
+    <form action="zadatak03.html">
+        <table>
+            <tr>
+                <th>Status:</th>
+                <td><label for="redovan"> Redovan:</label><input type="radio" name="samo_jedan" value="Redovan"
+                        id="redovan">
+                    <label for="izvanredan"> Izvanredan:</label><input type="radio" name="samo_jedan" value="Izvanredan"
+                        id="izvanredan">
+                </td>
+            </tr>
+            <tr>
+                <th><label for="email">E-mail</label></th>
+                <td><input type="email" id="email" name="email" size ="23"></td>
+            </tr>
+            <tr>
+                <th><label for="courses">Smjer:</label></th>
+                <td>
+                    <select id="courses">
+                        <option>Uvod u programiranje</option>
+                        <option>Osnove izrade web stranica</option>
+                        <option selected>Baze podataka</option>
+                        <option>Objektno programiranje</option>
+                        <option>Strukture podataka</option>
+
+                    </select>
+                </td>
+            <tr>
+                <th><label for="check">Završni:</label></th>
+                <td><input type="checkbox" id="check"></td>
+            </tr>
+            </tr>
+            <tr>
+                <th><button type="submit">Next</button></th>
+                <td></td>
+            </tr>
+
+        </table>
+    </form>
+</body>
+
+</html>
