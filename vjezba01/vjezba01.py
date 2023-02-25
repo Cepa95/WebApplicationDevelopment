@@ -1,4 +1,4 @@
-import socket, time, re
+import socket, time
 
 def connect_to_server(ip, port, retry = 10):
     s = socket.socket()
@@ -29,43 +29,59 @@ def get_source(s, ip, page):
 
 def get_links(response):
     beg = 0
+    links=['0']
+    counter =0
     while True:
-
-        if len(links) >= 50:
-            break
-
+        
+        if counter>=50 or int(links[0]) >=50 or len(links) >=50:
+            return links
+        
         beg_str = response.find('href="', beg)   
         if beg_str == -1:
             return links
         
-        end_str = response.find('"', beg_str + 6)      
+        end_str = response.find('"', beg_str + 6) #ne moze .html, treba paziti i na druge ekstenzije     
         link = response[beg_str + 6:end_str]
     
-
-        if link[-4:] == "html" and link not in links:
-            links.append(link)
+        if link[-5:] == ".html":
+            put_together = 1 +int(links[0])
+            links[0]=str(put_together)
+            if link not in links:
+                links.append(link)
 
         beg = end_str + 1
+        counter+=1
+        
+    return links
   
 
-def get_the_rest():
-    for check_links in links[1:]:
+def get_the_rest(links):
+    all_links=links #da mogu manipulirati varijablom links
+    for check_links in links[1:]: #na nultoj poziciji se nalazi integer koji broji iteracije
+        check_links="1280/"+check_links #putanja
         print(check_links, "provjera")
         s = connect_to_server(ip,port)
         response = get_source(s,ip,check_links)
-        print(get_links(response), "getano")
+        all_links_variable =get_links(response)
+        for link in all_links_variable[1:]:  # isto
+            put_together = 1 +int(links[0])
+            links[0]=str(put_together)
+            if link not in all_links: #da ne ubaci iste linkove u all_links
+                all_links.append(link)
+      
+    return all_links[1:]# na istu semu sad kada se ispise rezultat da nema broja iteracija
 
 
 ip = 'www.optimazadar.hr'
 port = 80
 page = '1280/djelatnost1280.html'
-links = [page]
+
 
 s = connect_to_server(ip, port)
 response = get_source(s, ip, page)
-print(get_links(response))
-print("novo")
-get_the_rest()
-print(links)
+first_page_links = get_links(response)
+#print(first_page_links)
+print("sve")
+print(get_the_rest(first_page_links))
 
 s.close()
