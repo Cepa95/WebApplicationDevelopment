@@ -30,10 +30,9 @@ def get_source(s, ip, page):
 def get_links(response):
     beg = 0
     links=['0']
-    counter =0
     while True:
         
-        if counter>=50 or int(links[0]) >=50 or len(links) >=50:
+        if int(links[0]) >=50 or len(links) >=50:
             return links
         
         beg_str = response.find('href="', beg)   
@@ -50,9 +49,6 @@ def get_links(response):
                 links.append(link)
 
         beg = end_str + 1
-        counter+=1
-        
-    return links
   
 
 def get_the_rest(links):
@@ -64,8 +60,8 @@ def get_the_rest(links):
         response = get_source(s,ip,check_links)
         all_links_variable =get_links(response)
         for link in all_links_variable[1:]:  # isto
-            put_together = 1 +int(links[0])
-            links[0]=str(put_together)
+            put_together = 1 +int(all_links[0])
+            all_links[0]=str(put_together)
             if link not in all_links: #da ne ubaci iste linkove u all_links
                 all_links.append(link)
       
