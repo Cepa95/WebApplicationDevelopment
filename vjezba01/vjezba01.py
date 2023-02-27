@@ -49,10 +49,11 @@ def get_links(response):
                 links.append(link)
 
         beg = end_str + 1
+   
+  
   
 
 def get_the_rest(links):
-    all_links=links #da mogu manipulirati varijablom links
     for check_links in links[1:]: #na nultoj poziciji se nalazi integer koji broji iteracije
         check_links="1280/"+check_links #putanja
         print(check_links, "provjera")
@@ -60,12 +61,11 @@ def get_the_rest(links):
         response = get_source(s,ip,check_links)
         all_links_variable =get_links(response)
         for link in all_links_variable[1:]:  # isto
-            put_together = 1 +int(all_links[0])
-            all_links[0]=str(put_together)
-            if link not in all_links: #da ne ubaci iste linkove u all_links
-                all_links.append(link)
-      
-    return all_links[1:]# na istu semu sad kada se ispise rezultat da nema broja iteracija
+            put_together = 1 +int(links[0])
+            links[0]=str(put_together)
+            if link not in links: #da ne ubaci iste linkove u links
+                links.append(link)
+    return links[1:]# na istu semu sad kada se ispise rezultat da nema broja iteracija
 
 
 ip = 'www.optimazadar.hr'
