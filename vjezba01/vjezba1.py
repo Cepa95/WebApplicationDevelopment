@@ -40,14 +40,14 @@ def get_links(response):
             return links
         
         end_str = response.find('"', beg_str + 6) #ne moze .html, treba paziti i na druge ekstenzije     
-        link = response[beg_str + 6:end_str]
-    
-        if link[-5:] == ".html":
-            put_together = 1 +int(links[0])
-            links[0]=str(put_together)
-            if link not in links:
-                links.append(link)
-
+        if (response.find("200 OK")):
+            
+            link = response[beg_str + 6:end_str]
+            if link[-5:] == ".html":
+                put_together = 1 +int(links[0])
+                links[0]=str(put_together)
+                if link not in links:
+                    links.append(link)
         beg = end_str + 1
    
   
