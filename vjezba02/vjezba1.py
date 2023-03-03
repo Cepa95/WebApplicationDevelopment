@@ -1,13 +1,11 @@
 #!python
 
-import cgi
-import os
 import cgitb
 cgitb.enable(display=0, logdir="")
 
 print('''
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hrv">
 
 <head>
     <meta charset="UTF-8">
