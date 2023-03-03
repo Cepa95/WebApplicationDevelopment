@@ -1,4 +1,5 @@
 #!python
+
 import cgi
 import cgitb
 cgitb.enable(display=0, logdir="")
@@ -51,7 +52,7 @@ print ('''
             </tr>
             <tr>
                 <th>E-mail</th>
-                <td><input type="email" name="email" size ="23"></td>
+                <td><input type="email" name="email" size ="23" value=""></td>
             </tr>
             <tr>
                 <th>Smjer:</th>

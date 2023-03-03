@@ -1,6 +1,6 @@
 #!python
 
-import cgitb
+import cgitb #za formatiranje iznimki koje se dogode u cgi skriptama
 cgitb.enable(display=0, logdir="")
 
 print('''

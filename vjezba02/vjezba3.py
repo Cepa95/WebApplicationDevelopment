@@ -6,8 +6,12 @@ cgitb.enable(display=0, logdir="")
 params = cgi.FieldStorage()
 
 checkbox=params.getvalue("check") 
-if not params.getvalue("check"): #provjera jel checkbox odabran
+if (not checkbox): #provjera jel checkbox odabran
    checkbox = "Ne"
+
+# radio = params.getvalue("just_one")
+# if (radio !="Redovan" or radio != "Izvanredan"):
+#     print("Location: vjezba2.py")
 
 # email = params.getvalue("email")
 # if (not email):
@@ -52,7 +56,7 @@ print('''
             <tr>
 
                 <th> Napomene:</th>
-                <td><textarea rows="5" cols="19" placeholder="Prelazak na izvanredni studij...." name="tekstarea"></textarea></td>
+                <td><textarea rows="5" cols="19" placeholder="Prelazak na izvanredni studij...." name="tekstarea" value=""></textarea></td>
             </tr>
            ''')
 
@@ -73,9 +77,9 @@ print('''<tr>
 </body>
 ''')
 
-print ('')
-print (params.getvalue("firstname")) #ovaj firstname, tako i password =>name sad se odnose na vjezbu2.py i njihove input tipove
-print ('')
-print (params.getvalue("password")) #ispis cgi vrijednosti
-print (checkbox) #ispis varijable
-#print(email)
+#print ('')
+# print (params.getvalue("firstname")) #ovaj firstname, tako i password =>name sad se odnose na vjezbu2.py i njihove input tipove
+# print ('')
+# print (params.getvalue("password")) #ispis cgi vrijednosti
+# print (checkbox) #ispis varijable
+# #print(email)
