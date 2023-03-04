@@ -5,9 +5,11 @@ import cgitb
 cgitb.enable(display=0, logdir="")
 params = cgi.FieldStorage()
 
-checkbox=params.getvalue("check") 
-if (not checkbox): #provjera jel checkbox odabran
-   checkbox = "Ne"
+def checkbox_check():
+    checkbox=params.getvalue("check") 
+    if (not checkbox): #provjera jel checkbox odabran
+        checkbox = "Ne"
+    return checkbox
 
 # radio = params.getvalue("just_one")
 # if (radio !="Redovan" or radio != "Izvanredan"):
@@ -26,8 +28,8 @@ if (not checkbox): #provjera jel checkbox odabran
 # if (not divide[0].islower()):
 #     print("Location: vjezba2.py")
 
-
-print('''
+def print_html3(checkbox):
+    print('''
 <!DOCTYPE html>
 <html lang="en">
 
@@ -59,15 +61,13 @@ print('''
                 <td><textarea rows="5" cols="19" placeholder="Prelazak na izvanredni studij...." name="tekstarea" value=""></textarea></td>
             </tr>
            ''')
-
-print('<input type="hidden" name="firstname" value="' + params.getvalue("firstname") + '">')
-print('<input type="hidden" name="password" value="' + params.getvalue("password") + '">')
-print('<input type="hidden" name="just_one" value="' + params.getvalue("just_one") + '">')
-print('<input type="hidden" name="email" value="' + params.getvalue("email") + '">')
-print('<input type="hidden" name="courses" value="' + params.getvalue("courses") + '">')
-print('<input type="hidden" name="check" value="' + checkbox + '">')
-
-print('''<tr>
+    print('<input type="hidden" name="firstname" value="' + params.getvalue("firstname") + '">')
+    print('<input type="hidden" name="password" value="' + params.getvalue("password") + '">')
+    print('<input type="hidden" name="just_one" value="' + params.getvalue("just_one") + '">')
+    print('<input type="hidden" name="email" value="' + params.getvalue("email") + '">')
+    print('<input type="hidden" name="courses" value="' + params.getvalue("courses") + '">')
+    print('<input type="hidden" name="check" value="' + checkbox + '">')
+    print('''<tr>
                 <th><button type="submit" value="Submit">Next</button></th>
                 <td></td>
             </tr>
@@ -76,6 +76,10 @@ print('''<tr>
     </form>
 </body>
 ''')
+
+
+checkbox=checkbox_check()
+print_html3(checkbox)
 
 #print ('')
 # print (params.getvalue("firstname")) #ovaj firstname, tako i password =>name sad se odnose na vjezbu2.py i njihove input tipove

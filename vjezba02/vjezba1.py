@@ -3,7 +3,9 @@
 import cgitb #za formatiranje iznimki koje se dogode u cgi skriptama
 cgitb.enable(display=0, logdir="")
 
-print('''
+
+def print_html1():
+    print('''
 <!DOCTYPE html>
 <html lang="hrv">
 
@@ -51,4 +53,9 @@ print('''
 
 </html>
 ''')
+    
+print_html1()
+
+
+
 
