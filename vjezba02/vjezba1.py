@@ -1,8 +1,8 @@
 #!python
 
-import cgitb #za formatiranje iznimki koje se dogode u cgi skriptama
-cgitb.enable(display=0, logdir="")
-
+# import cgitb #za formatiranje iznimki koje se dogode u cgi skriptama CGI Traceback
+# cgitb.enable(display=0, logdir="") #dobro je dok se debugga, ali nakon sto sve proradi dobra je praksa iskljuciti
+                                     #da se ne slucajno ne odaju osjetljive informacije o serveru i slicno
 
 def print_html1():
     print('''

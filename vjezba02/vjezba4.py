@@ -1,8 +1,9 @@
 #!python
 
 import cgi
-import cgitb
-cgitb.enable(display=0, logdir="")
+# import cgitb
+# cgitb.enable(display=0, logdir="")
+
 params = cgi.FieldStorage()
 
 def textarea_check():
@@ -26,7 +27,6 @@ def print_html4(note):
       td {
         border: 1px black solid;
       }
-
       th {
         text-align: left;
       }
@@ -75,6 +75,6 @@ note = textarea_check()
 print('') # mora biti ovdi '' prije print_html4 ili ce mi bacati server error, a baca mi error jer
 print_html4(note)             # za razliku od prijasnih vjezbi nisam <!DOCTYPE html> odvojio od ''' <== PRIMJER GRESKE KOJA MOZE DOCI
                              
-
 # print (params.getvalue("email"))
 # print(note)
+#print (params.getvalue("password"))

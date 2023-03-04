@@ -1,8 +1,9 @@
 #!python
 
 import cgi
-import cgitb
-cgitb.enable(display=0, logdir="")
+# import cgitb
+# cgitb.enable(display=0, logdir="")
+
 params = cgi.FieldStorage()
 
 def checkbox_check():
@@ -13,8 +14,9 @@ def checkbox_check():
 
 # radio = params.getvalue("just_one")
 # if (radio !="Redovan" or radio != "Izvanredan"):
-#     print("Location: vjezba2.py")
-
+#     print("Location: vjezba2.py")         #zbog locationa kojeg sam radio u vjezbi2 gdje sam provjeravao email, ovdi ce me iako pise location
+                                            #vjezba2.py voditi na location: vjezba1.py,  gdje bih iznova morao upisivati podatke, da sam upisao
+                                            #location: vjezba4.py odvelo bi me na kraj, ali bi mi skripta zaboravila sve podatke.
 # email = params.getvalue("email")
 # if (not email):
 #     print("Location: vjezba2.py")
@@ -45,13 +47,11 @@ def print_html3(checkbox):
         td {
             border: 1px black solid;
         }
-
         th {
             text-align: left;
         }
     </style>
 </head>
-
 <body>
     <form action="vjezba4.py" method="post">
         <table>
@@ -71,7 +71,6 @@ def print_html3(checkbox):
                 <th><button type="submit" value="Submit">Next</button></th>
                 <td></td>
             </tr>
-
         </table>
     </form>
 </body>
@@ -82,7 +81,7 @@ checkbox=checkbox_check()
 print_html3(checkbox)
 
 #print ('')
-# print (params.getvalue("firstname")) #ovaj firstname, tako i password =>name sad se odnose na vjezbu2.py i njihove input tipove
+# print (params.getvalue("firstname")) #ovaj firstname, tako i password =>name sad se odnose na vjezbu2.py i njihove input hidden tipove
 # print ('')
 # print (params.getvalue("password")) #ispis cgi vrijednosti
 # print (checkbox) #ispis varijable

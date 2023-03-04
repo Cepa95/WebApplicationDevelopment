@@ -1,8 +1,8 @@
 #!python
 
 import cgi
-import cgitb
-cgitb.enable(display=0, logdir="")
+# import cgitb
+# cgitb.enable(display=0, logdir="")
 
 params = cgi.FieldStorage()
 
@@ -33,7 +33,6 @@ def print_html2():
         td {
             border: 1px black solid;
         }
-
         th {
             text-align: left;
         }
@@ -87,7 +86,6 @@ def print_html2():
 password_check(password,password_repeat, first_name)
 #print('')
 print_html2()
-
 
 # print ('<br>')
 # print (params.getvalue("firstname"))
