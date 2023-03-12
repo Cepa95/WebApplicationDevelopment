@@ -20,20 +20,17 @@ def get_cookies():
     dict = {}
     for key in predmeti.subjects: 
         if cookie_dict.get(key):
-            dict[key] = cookie_dict.get(key).value #moramo paziti da izvucemo samo vrijednost jer value_attribute sadrzi i atribute poput
+            dict[key] = cookie_dict.get(key).value #moramo paziti da izvucemo samo vrijednost jer key sadrzi i atribute poput
         else:                                      #max-age, secure, expires....
             dict[key] = 'not' #dosta bitan uvjet za prvi put jer da ne postoji cookie u pocetku              
     return dict               #kada se pokrene xampp, u browseru bi doslo to poteskoca, primjerice ne bi se ispisala tablica zbog print_subjects
         
-        
-                            
-
+                         
 def check(key, cookie, status_key): #provjera je li korisnik odabrao polje
    
     if cookie[key] == status_key:
         return ' checked/>'
     return ' />'
-
 
 def print_subjects(key, cookie):
     print('''
@@ -97,11 +94,12 @@ def print_list_button(cookie):
     while counter !=4:
         for key in cookie:
             if key in cookie:
-                if cookie[key] == "pass":
+                if cookie[key] == "pass" and predmeti.subjects[key]["year"] == counter: #da mi ne ponovi isto vise puta trebam ovi drugi uvjet
                     sum += predmeti.subjects[key]["ects"]
                 ## da se izbjegne TypeError mora se u Pythonu castati int u str, ne dopusta povezivanje
                 ## stringova i non stringova
                 if predmeti.subjects[key]["year"] == counter:
+
                     print('''
                     <tr>
                         <td>''' + predmeti.subjects[key]["name"] + '''</td>
