@@ -18,31 +18,38 @@ def get_cookies():
                                                             #dok, SimpleCookie nam omogucuje da izvadimo podatke na individualane
                                                             #cookie vrijednosti, daje nam to u obliku dictionaryja
     dict = {}
-    for key, value_attribute in cookie_dict.items():
-        dict[key] = value_attribute.value #moramo paziti da izvucemo samo vrijednost jer value_attribute sadrzi i atribute poput
-    return dict                           #max-age, secure, expires....
+    for key in predmeti.subjects: 
+        if cookie_dict.get(key):
+            dict[key] = cookie_dict.get(key).value #moramo paziti da izvucemo samo vrijednost jer value_attribute sadrzi i atribute poput
+        else:                                      #max-age, secure, expires....
+            dict[key] = 'not' #dosta bitan uvjet za prvi put jer da ne postoji cookie u pocetku              
+    return dict               #kada se pokrene xampp, u browseru bi doslo to poteskoca, primjerice ne bi se ispisala tablica zbog print_subjects
+        
+        
+                            
 
-def check(key, dict, status_key): #provjera je li korisnik odabrao polje
-    if dict[key] == status_key:
+def check(key, cookie, status_key): #provjera je li korisnik odabrao polje
+   
+    if cookie[key] == status_key:
         return ' checked/>'
-    return '/>'
+    return ' />'
 
 
-def print_subject(key, dict):
+def print_subjects(key, cookie):
     print('''
     <tr>
         <td>''' + predmeti.subjects[key]["name"] + '''</td> 
         <td>
     ''')#ispis predmeta
+   
     for status_key, value in predmeti.status_names.items():
-        print(value + '<input type="radio" name="' + key + '" value="' + status_key + '"' + check(key, dict, status_key)) #checkiranje
+        print(value + '<input type="radio" name="' + key + '" value="' + status_key + '"' + check(key, cookie, status_key)) #checkiranje
     print('''
         </td>
     </tr>
     ''')
 
-
-def print_subjects_button(paramsValue, dict):
+def print_subjects_button(paramsValue, cookie):
     print('''
     <table>
         <tr>
@@ -60,17 +67,19 @@ def print_subjects_button(paramsValue, dict):
     if paramsValue == "1. godina":
         for key in predmeti.subjects:
             if predmeti.subjects[key]["year"] == 1:
-                print_subject(key, dict)
+                print("provjera1")
+                print_subjects(key, cookie)
     elif paramsValue == "2. godina":
         for key in predmeti.subjects:
             if predmeti.subjects[key]["year"] == 2:
-                print_subject(key, dict)
+                print("provjera2")
+                print_subjects(key, cookie)
     else:
         for key in predmeti.subjects:
             if predmeti.subjects[key]["year"] == 3:
-                print_subject(key, dict)
+                print("provjera3")
+                print_subjects(key, cookie)
 
-   
 
 def print_list_button(cookie):
     print('''

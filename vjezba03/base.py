@@ -13,8 +13,8 @@ def start_html():
     </style>
     </head>
     <body>
-    <form action="" method="post"> 
-    ''')               
+    <form method="post"> 
+    ''')                ##ne treba action sada
 
 def end_html():
     print('''
