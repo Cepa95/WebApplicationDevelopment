@@ -5,11 +5,16 @@ def start_html():
     <!DOCTYPE html>
     <html>
     <head>
-        <title>IWA - Vjezba 3</title>
+        <title>Vjezba03</title>
+    <style>
+    table, th, tr, td {
+        border: 1px solid
+        }
+    </style>
     </head>
     <body>
-    <form action="" method="post">
-    ''')
+    <form method="post"> 
+    ''')                ##ne treba action sada
 
 def end_html():
     print('''

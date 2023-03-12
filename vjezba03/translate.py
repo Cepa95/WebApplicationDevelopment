@@ -1,36 +1,110 @@
 #!python.exe
+
 from http import cookies
+import predmeti
 import os
 
 
-translations = {
-    "eng":{'home':'home', 'articles':'articles', 'cart':'cart', 'contact':'contact'},
-    "hr":{'home':'pocetna', 'articles':'artikli', 'cart':'kosarica', 'contact':'kontakt'},
-    "de":{'home':'Haus', 'articles':'Artikeln', 'cart':'Verkaufstasche', 'contact':'Kontakt'},
-    "es":{'home':'Casa', 'articles':'Arti', 'cart':'Bolsa', 'contact':'Kontacto'}
-}
+def set_cookies(params):
+    for key in predmeti.subjects:
+        if params.getvalue(key): #u slucaju da smo mijenjali checkboxove ili vec postoji
+            cookie = cookies.SimpleCookie()
+            cookie[key] = params.getvalue(key)
+            print(cookie.output()) #salje cookie klijentu
 
-def decide_language(lang=None):
-    cookies_string = os.environ.get('HTTP_COOKIE', '')
-    all_cookies_object = cookies.SimpleCookie(cookies_string)
-    if lang is not None:
-        cookie = cookies.SimpleCookie()
-        cookie['lang'] = lang
-        print (cookie.output())
-    elif all_cookies_object.get('lang'):
-        lang = all_cookies_object.get('lang').value
+def get_cookies():
+    cookie_string = os.environ.get('HTTP_COOKIE', '')       #dohvacanje cookie-ja u obliku stringa, trebamo ovu
+    cookie_dict = cookies.SimpleCookie(cookie_string)       #funkciju da mozemo dohvatit cookie od klijenta ->HTTP_COOKIE
+                                                            #dok, SimpleCookie nam omogucuje da izvadimo podatke na individualane
+                                                            #cookie vrijednosti, daje nam to u obliku dictionaryja
+    dict = {}
+    for key, value_attribute in cookie_dict.items():
+        dict[key] = value_attribute.value #moramo paziti da izvucemo samo vrijednost jer value_attribute sadrzi i atribute poput
+    return dict                           #max-age, secure, expires....
+
+def check(key, dict, status_key): #provjera je li korisnik odabrao polje
+    if dict[key] == status_key:
+        return ' checked/>'
+    return '/>'
+
+
+def print_subject(key, dict):
+    print('''
+    <tr>
+        <td>''' + predmeti.subjects[key]["name"] + '''</td> 
+        <td>
+    ''')#ispis predmeta
+    for status_key, value in predmeti.status_names.items():
+        print(value + '<input type="radio" name="' + key + '" value="' + status_key + '"' + check(key, dict, status_key)) #checkiranje
+    print('''
+        </td>
+    </tr>
+    ''')
+
+
+def print_subjects_button(paramsValue, dict):
+    print('''
+    <table>
+        <tr>
+            <th>''' + paramsValue + '''</th>
+        </tr>
+        <tr>
+            <th>Predmet</th>
+            <th>Status</th>
+        </tr>
+    ''')
+
+    ## Prosljedeni parametar paramsValue provjeravamo koji je string i obavljamo sve moguce radnje
+    ## tako ako je paramsValue "1 godina uzimamo sve kljuceve koji imaju vrijednost godine 1, else
+    ## je sam po sebi dovoljan vamo jer smo dovoljnu provjeru napravili u index.py
+    if paramsValue == "1. godina":
+        for key in predmeti.subjects:
+            if predmeti.subjects[key]["year"] == 1:
+                print_subject(key, dict)
+    elif paramsValue == "2. godina":
+        for key in predmeti.subjects:
+            if predmeti.subjects[key]["year"] == 2:
+                print_subject(key, dict)
     else:
-        lang = 'eng'
-    return lang
+        for key in predmeti.subjects:
+            if predmeti.subjects[key]["year"] == 3:
+                print_subject(key, dict)
 
+   
 
-
-
-def display_language():
-    for key in translations:
-        print ('<a href="?lang=' + key + '">' + key +'</a>')
-
-
-def make_translations(language, key):
-    return translations.get(language, translations['eng']).get(key, 'prazno')
-
+def print_list_button(cookie):
+    print('''
+    <table>
+        <tr>
+            <th>Predmet</th>
+            <th>Status</th>
+            <th>Ects</th>
+        </tr>
+    ''')
+    #kasni za jedan klik, dok to server ne rijesi
+    sum = 0
+    counter = 1
+    #stavit cemo counter zbog finese, da ispise prvo prvi semestar, pa drugi, pa treci
+    while counter !=4:
+        for key in cookie:
+            if key in cookie:
+                if cookie[key] == "pass":
+                    sum += predmeti.subjects[key]["ects"]
+                ## da se izbjegne TypeError mora se u Pythonu castati int u str, ne dopusta povezivanje
+                ## stringova i non stringova
+                if predmeti.subjects[key]["year"] == counter:
+                    print('''
+                    <tr>
+                        <td>''' + predmeti.subjects[key]["name"] + '''</td>
+                        <td>''' + predmeti.status_names[cookie[key]] + '''</td>
+                        <td>''' + str(predmeti.subjects[key]["ects"]) + '''</td> 
+                    </tr>''')   
+        counter+=1
+            
+    print('''
+    <tr>
+        <td></td>
+        <td>Total:</td>
+        <td>''' + str(sum) + '''</td>
+    </tr>''')
+    print('</table>')
