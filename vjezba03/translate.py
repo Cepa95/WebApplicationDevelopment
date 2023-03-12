@@ -26,11 +26,6 @@ def get_cookies():
     return dict               #kada se pokrene xampp, u browseru bi doslo to poteskoca, primjerice ne bi se ispisala tablica zbog print_subjects
         
                          
-def check(key, cookie, status_key): #provjera je li korisnik odabrao polje
-   
-    if cookie[key] == status_key:
-        return ' checked/>'
-    return ' />'
 
 def print_subjects(key, cookie):
     print('''
@@ -39,8 +34,13 @@ def print_subjects(key, cookie):
         <td>
     ''')#ispis predmeta
    
-    for status_key, value in predmeti.status_names.items():
-        print(value + '<input type="radio" name="' + key + '" value="' + status_key + '"' + check(key, cookie, status_key)) #checkiranje
+    for status_key, value in predmeti.status_names.items():  #provjera je li korisnik odabrao polje, defaultno je 'not'
+
+        if cookie[key] == status_key:
+            print(value + '<input type="radio" name="' + key + '" value="' + status_key + '" checked/>') #checkiranje
+        else:
+            print(value + '<input type="radio" name="' + key + '" value="' + status_key + '" >')
+
     print('''
         </td>
     </tr>
