@@ -64,17 +64,17 @@ def print_subjects_button(paramsValue, cookie):
     if paramsValue == "1. godina":
         for key in predmeti.subjects:
             if predmeti.subjects[key]["year"] == 1:
-                print("provjera1")
+                #print("provjera1")
                 print_subjects(key, cookie)
     elif paramsValue == "2. godina":
         for key in predmeti.subjects:
             if predmeti.subjects[key]["year"] == 2:
-                print("provjera2")
+                #print("provjera2")
                 print_subjects(key, cookie)
     else:
         for key in predmeti.subjects:
             if predmeti.subjects[key]["year"] == 3:
-                print("provjera3")
+                #print("provjera3")
                 print_subjects(key, cookie)
 
 

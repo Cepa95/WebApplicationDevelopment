@@ -20,7 +20,7 @@ print('<input type="submit" name="button" value="Upisni list"/>')
 
 
 if params.getvalue("button") == "1. godina" or params.getvalue("button") == "2. godina" or params.getvalue("button") == "3. godina":
-    print("provjera")
+    #print("provjera")
     translate.print_subjects_button(params.getvalue('button'), cookie)
 elif params.getvalue("button") == "Upisni list":
     translate.print_list_button(cookie)
