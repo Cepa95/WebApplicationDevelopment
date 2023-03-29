@@ -25,5 +25,7 @@ if params.getvalue("button") == "1. godina" or params.getvalue("button") == "2. 
 elif params.getvalue("button") == "Upisni list":
     translate.print_list_button(cookie)
 
+base.end_html()
+
 
  
