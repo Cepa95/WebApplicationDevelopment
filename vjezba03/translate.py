@@ -27,26 +27,37 @@ def get_cookies():
         
                          
 
-def print_subjects(key, cookie):
+def print_subjects(key, cookie, params):
     print('''
     <tr>
         <td>''' + predmeti.subjects[key]["name"] + '''</td> 
         <td>
     ''')#ispis predmeta
-   
-    for status_key, value in predmeti.status_names.items():  #provjera je li korisnik odabrao polje, defaultno je 'not'
 
-        if cookie[key] == status_key:
-            print(value + '<input type="radio" name="' + key + '" value="' + status_key + '" checked/>') #checkiranje
-        else:
-            print(value + '<input type="radio" name="' + key + '" value="' + status_key + '" >')
+    if key in params:
+        for status_key, value in predmeti.status_names.items():  #provjera je li korisnik odabrao polje, defaultno je 'not'
+
+            if params.getvalue(key) == status_key: #params vamo sluzi da cookie ne kasni jedan korak
+                print(value + '<input type="radio" name="' + key + '" value="' + status_key + '" checked/>') #checkiranje
+            else:
+                print(value + '<input type="radio" name="' + key + '" value="' + status_key + '" >')
+   
+    else:
+        for status_key, value in predmeti.status_names.items():  #provjera je li korisnik odabrao polje, defaultno je 'not'
+
+            if cookie[key] == status_key:
+                print(value + '<input type="radio" name="' + key + '" value="' + status_key + '" checked/>') #checkiranje
+            else:
+                print(value + '<input type="radio" name="' + key + '" value="' + status_key + '" >')
 
     print('''
         </td>
     </tr>
     ''')
 
-def print_subjects_button(paramsValue, cookie):
+
+
+def print_subjects_button(paramsValue, cookie, params):
     print('''
     <table>
         <tr>
@@ -65,17 +76,19 @@ def print_subjects_button(paramsValue, cookie):
         for key in predmeti.subjects:
             if predmeti.subjects[key]["year"] == 1:
                 #print("provjera1")
-                print_subjects(key, cookie)
+                print_subjects(key, cookie, params)
     elif paramsValue == "2. godina":
         for key in predmeti.subjects:
             if predmeti.subjects[key]["year"] == 2:
                 #print("provjera2")
-                print_subjects(key, cookie)
+                print_subjects(key, cookie, params)
     else:
         for key in predmeti.subjects:
             if predmeti.subjects[key]["year"] == 3:
                 #print("provjera3")
-                print_subjects(key, cookie)
+                print_subjects(key, cookie, params)
+
+
 
 def print_list_button(cookie, params):
     print('''

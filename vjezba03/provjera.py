@@ -31,4 +31,26 @@ subjects = {
 #     print(value)
 # print(subjects['uup']['name'])
 
- 
+
+year_names = {
+        1 : '1. godina',
+        2 : '2. godina',
+        3 : '3. godina'
+    }
+
+year_ids = {
+        '1. godina' : 1,
+        '2. godina' : 2,
+        '3. godina' : 3
+}
+
+status_names = {
+    'not' : 'Ne upisuje',
+    'enr' : 'Upisuje',
+    'pass' : 'Položen'
+}
+
+
+for status_key, value in status_names.items():
+    print(value)
+
