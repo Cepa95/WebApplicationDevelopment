@@ -15,7 +15,7 @@ cookie = translate.get_cookies()
 base.start_html()
 
 for key in predmeti.year_ids:
-        print('<input type="submit" name="button" value="' + key + '"/> <br>') #petlja za kreiranje botuna za godine
+        print('<input type="submit" name="button" value="' + key + '"/>') #petlja za kreiranje botuna za godine
 print('<input type="submit" name="button" value="Upisni list"/>') 
 
 
@@ -23,7 +23,7 @@ if params.getvalue("button") == "1. godina" or params.getvalue("button") == "2. 
     #print("provjera")
     translate.print_subjects_button(params.getvalue('button'), cookie)
 elif params.getvalue("button") == "Upisni list":
-    translate.print_list_button(cookie)
+    translate.print_list_button(cookie, params)
 
 base.end_html()
 

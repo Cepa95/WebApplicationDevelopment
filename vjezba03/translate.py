@@ -77,8 +77,7 @@ def print_subjects_button(paramsValue, cookie):
                 #print("provjera3")
                 print_subjects(key, cookie)
 
-
-def print_list_button(cookie):
+def print_list_button(cookie, params):
     print('''
     <table>
         <tr>
@@ -87,27 +86,31 @@ def print_list_button(cookie):
             <th>Ects</th>
         </tr>
     ''')
-    #kasni za jedan klik, dok to server ne rijesi
+  
     sum = 0
-    counter = 1
-    #stavit cemo counter zbog finese, da ispise prvo prvi semestar, pa drugi, pa treci
-    while counter !=4:
-        for key in cookie:
-            if key in cookie:
-                if cookie[key] == "pass" and predmeti.subjects[key]["year"] == counter: #da mi ne ponovi isto vise puta trebam ovi drugi uvjet
-                    sum += predmeti.subjects[key]["ects"]
-                ## da se izbjegne TypeError mora se u Pythonu castati int u str, ne dopusta povezivanje
-                ## stringova i non stringova
-                if predmeti.subjects[key]["year"] == counter:
+    for subject_id in predmeti.subjects:
+        if subject_id in params:
+            if params.getvalue(subject_id) == 'pass':
+                sum += predmeti.subjects[subject_id]["ects"]
+            ## da se izbjegne TypeError mora se u Pythonu castati int u str, ne dopusta povezivanje
+            ## stringova i non stringova
+            print('''
+            <tr>
+                <td>''' + predmeti.subjects[subject_id]['name'] + '''</td>
+                <td>''' + predmeti.status_names[params.getvalue(subject_id)] + '''</td>
+                <td>''' + str(predmeti.subjects[subject_id]['ects']) + '''</td>
+            </tr>''') 
 
-                    print('''
+        elif subject_id in cookie:
+            if cookie[subject_id] == 'pass':
+                sum += predmeti.subjects[subject_id]["ects"]
+               
+            print('''
                     <tr>
-                        <td>''' + predmeti.subjects[key]["name"] + '''</td>
-                        <td>''' + predmeti.status_names[cookie[key]] + '''</td>
-                        <td>''' + str(predmeti.subjects[key]["ects"]) + '''</td> 
-                    </tr>''')   
-        counter+=1
-            
+                        <td>''' + predmeti.subjects[subject_id]["name"] + '''</td>
+                        <td>''' + predmeti.status_names[cookie[subject_id]] + '''</td>
+                        <td>''' + str(predmeti.subjects[subject_id]["ects"]) + '''</td> 
+                    </tr>''')      
     print('''
     <tr>
         <td></td>
