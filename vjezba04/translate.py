@@ -3,7 +3,7 @@ import predmeti
  
 def read_session_data(data):
     dictionary = {subject_id: 'not' for subject_id in predmeti.subjects} #sve postavlja na not
-    for subject_id in dictionary:
+    for subject_id in dictionary: # u slucaju da je korisnik checka neke predmete, ili je izmjenia svoj prethodni check
         if subject_id in data:
             dictionary[subject_id] = data[subject_id]
     return dictionary
