@@ -8,9 +8,9 @@ Napraviti Python skriptu za odabir predmeta. Primjer rada skripte je ilustriran 
 ![image](https://user-images.githubusercontent.com/124800316/224581716-5c1104b1-2b75-46e7-a900-bf254b02c278.png)
 
 
-Svaka od stranica (godina) zadržava status predmeta (radio button ostaje označen prema zadnjem odabiru). Da bi se to omogućilo, pri promijeni stranice, podatke o predmetima spremiti iz post parametara u kolacice i iz kolacica citati vrijednosti pri generiranju HTML-a. Skripta predmeti.py sadrži popis predmeta po godinama i druge potrebne podatke i potrebno ju je uključiti sa import. Sve funkcionalnosti moraju raditi i nakon dodavanja/uklanjanja predmeta iz popisa. Kôd podijeliti u funkcije za:
-•	Ispis jednog predmeta sa odabirom
-•	Ispis predmeta godine
-•	Ispis upisnog lista
-•	Spremanje odabira iz post parametara u kolacice
+Svaka od stranica (godina) zadržava status predmeta (radio button ostaje označen prema zadnjem odabiru). Da bi se to omogućilo, pri promijeni stranice, podatke o predmetima spremiti iz post parametara u kolacice i iz kolacica citati vrijednosti pri generiranju HTML-a. Skripta predmeti.py sadrži popis predmeta po godinama i druge potrebne podatke i potrebno ju je uključiti sa import. Sve funkcionalnosti moraju raditi i nakon dodavanja/uklanjanja predmeta iz popisa. Kod podijeliti u funkcije za:  
+•	Ispis jednog predmeta sa odabirom  
+•	Ispis predmeta godine  
+•	Ispis upisnog lista  
+•	Spremanje odabira iz post parametara u kolacice  
 
