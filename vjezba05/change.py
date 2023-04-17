@@ -20,8 +20,10 @@ if os.environ["REQUEST_METHOD"].upper() == "POST":
     password = params.getvalue("password")
     newPassword = params.getvalue("newPassword")
     newPassword2 = params.getvalue("newPassword2")
+    #za provjeru je li unesena ispravna stara lozinka i je li su nove unesene istovjetne
     passwordCheck, newPasswordUpdate = auth.change_password(str(username), password, newPassword, newPassword2)
     if passwordCheck and newPasswordUpdate:
+        #prije nego mi izadje is change.py unisti staru sesiju
         session.destroy_session()
         print('Location: login.py')
 
