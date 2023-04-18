@@ -44,7 +44,7 @@ elif params.getvalue("button") == "Upisni list":
 
 print('<br><input type="submit" name="submit" value="Submit"><br><br>')
 print('''
-<a href=changepass.py> Promjena lozinke </a><br><br>
+<a href=change.py> Promjena lozinke </a><br><br>
 <a href=logout.py> Log Out </a>
 ''')
 print('</form>')

@@ -54,8 +54,10 @@ def destroy_session():
 def get_session_id():
     http_cookies_str = os.environ.get('HTTP_COOKIE', '')
     get_all_cookies_object = cookies.SimpleCookie(http_cookies_str)
-    
-    session_id = get_all_cookies_object.get("session_id").value if get_all_cookies_object.get("session_id") else None
+    if get_all_cookies_object.get("session_id"):
+        session_id = get_all_cookies_object.get("session_id").value
+    else:
+         session_id = None
     return session_id
 
 def add_user_to_session(dict, session_id=None):

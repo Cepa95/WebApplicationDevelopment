@@ -9,20 +9,22 @@ import session
 
 params = cgi.FieldStorage()
 
-
 http_cookies_str = os.environ.get('HTTP_COOKIE', '')
 get_all_cookies_object = cookies.SimpleCookie(http_cookies_str)
 username = get_all_cookies_object.get("username").value
 
 user = db.get_user(username)
+#if prije dugog elifa da ne puca skripta
+if params.getvalue("return"):
+    print('Location: index.py')
 
-if os.environ["REQUEST_METHOD"].upper() == "POST":
+elif os.environ["REQUEST_METHOD"].upper() == "POST":
     password = params.getvalue("password")
     newPassword = params.getvalue("newPassword")
     newPassword2 = params.getvalue("newPassword2")
     #za provjeru je li unesena ispravna stara lozinka i je li su nove unesene istovjetne
     passwordCheck, newPasswordUpdate = auth.change_password(str(username), password, newPassword, newPassword2)
-    if passwordCheck and newPasswordUpdate:
+    if passwordCheck and newPasswordUpdate and params.getvalue("change"):
         #prije nego mi izadje is change.py unisti staru sesiju
         session.destroy_session()
         print('Location: login.py')
@@ -34,12 +36,12 @@ print('''
 <table>
   <tr>
     <td>
-        <h1>Change Password</h1>
+        <h2>Promjena lozinke</h2>
         <p> Username:''', str(username), '''</p>
         <input type="password" name="password" placeholder="Stara lozinka"><br><br>
         <input type="password" name="newPassword" placeholder="Nova lozinka"><br><br>
         <input type="password" name="newPassword2" placeholder="Ponovi novu lozinku"><br><br>
-        <input type="submit" value="Promijeni">
+        <input type="submit" name="change" value="Promijeni"> <input type="submit" name="return" value="natrag">
     </td>
   </tr>
 </table>
