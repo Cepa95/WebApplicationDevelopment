@@ -24,7 +24,7 @@ elif os.environ["REQUEST_METHOD"].upper() == "POST":
     newPassword2 = params.getvalue("newPassword2")
     #za provjeru je li unesena ispravna stara lozinka i je li su nove unesene istovjetne
     passwordCheck, newPasswordUpdate = auth.change_password(str(username), password, newPassword, newPassword2)
-    if passwordCheck and newPasswordUpdate and params.getvalue("change"):
+    if passwordCheck and newPasswordUpdate and params.getvalue("change") and password != newPassword:
         #prije nego mi izadje is change.py unisti staru sesiju
         session.destroy_session()
         print('Location: login.py')
@@ -36,7 +36,7 @@ print('''
 <table>
   <tr>
     <td>
-        <h2>Promjena lozinke</h2>
+        <h2>Promjena lozinke:</h2>
         <p> Username:''', str(username), '''</p>
         <input type="password" name="password" placeholder="Stara lozinka"><br><br>
         <input type="password" name="newPassword" placeholder="Nova lozinka"><br><br>
@@ -50,5 +50,7 @@ print('''
 if (os.environ["REQUEST_METHOD"].upper() == "POST" and not passwordCheck):
     print ("<p><b>ERROR:</b> Krivo unesena stara lozinka</p>")
 elif (os.environ["REQUEST_METHOD"].upper() == "POST" and not newPasswordUpdate):
-    print ("<p><b>ERROR:</b> Nisu unesene iste lozinke</p>")
+    print ("<p><b>ERROR:</b> Nisu unesene iste nove lozinke</p>")
+elif (os.environ["REQUEST_METHOD"].upper() == "POST" and password == newPassword):
+    print ("<p><b>ERROR:</b> Nova lozinka ne moze biti ista kao i stara lozinka</p>")
 base.end_html()

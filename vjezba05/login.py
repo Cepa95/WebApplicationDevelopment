@@ -28,13 +28,13 @@ print ('''
     <tr>
       <th>Username</th>
       <td>
-      <input type="text" name="username"  value="">
+      <input type="text" name="username"  value="" placeholder ="korisnicko ime">
       </td>
     </tr>
     <tr>
         <th>Password</th>
         <td>
-        <input type="password" name="password" value="" >
+        <input type="password" name="password" value=""  placeholder="*************">
         </td>
       </tr>
       <tr>

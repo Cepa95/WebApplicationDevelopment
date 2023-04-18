@@ -29,19 +29,19 @@ print ('''<form method="POST">
 <table>
   <tr>
     <td>username</td>
-    <td><input type="text" name="username"></td>
+    <td><input type="text" name="username" placeholder="korisnicko ime"></td>
   </tr>
   <tr>
     <td>email</td>
-    <td><input type="email" name="email"></td>
+    <td><input type="email" name="email" placeholder="example@gmail.com"></td>
   </tr>
   <tr>
     <td>password</td>
-    <td><input type="password" name="password"></td>
+    <td><input type="password" name="password" placeholder="*************"></td>
   </tr>
   <tr>
     <td>PasswordCheck</td>
-    <td><input type="password" name="passwordCheck"></td>
+    <td><input type="password" name="passwordCheck" placeholder="*************"></td>
   </tr>
   <tr>
     <td colspan="2"><input type="submit" value="Register"></td>
