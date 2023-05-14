@@ -1,0 +1,8 @@
+{% block content %}
+  <h1>Create Movies</h1>
+  <form method="POST" action="">
+    {% csrf_token %}
+   <p> {{ form }}</p>
+    <button type="submit">Create Movie</button>
+  </form>
+{% endblock %}

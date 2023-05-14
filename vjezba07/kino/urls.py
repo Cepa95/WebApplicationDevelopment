@@ -24,5 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('KinoKarta/hello', views.say_hello),
     path('__debug__/', include('debug_toolbar.urls')),
-    path('movies/', views.movies)
+    path('movie/', views.movies),
+    path('create/', views.create_movies)
+   
 ]
