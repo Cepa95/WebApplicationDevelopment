@@ -33,3 +33,44 @@ def create_movies(request):
 
     return render(request, 'create_movies.html', {'form': form})
 
+
+def sve_projekcije(request):
+    projekcije = Projekcija.objects.all()
+    return render(request, 'projekcije.html', {'projekcije': projekcije})
+
+
+def user_tickets(request, user_id):
+    user = User.objects.get(id=user_id)
+    tickets = Karta.objects.filter(user=user)
+    context = {
+        'user': user,
+        'tickets': tickets
+    }
+    return render(request, 'tickets.html', context)
+
+
+
+def create_tickets(request, projekcija_id, user_id):
+    projekcija = Projekcija.objects.get(id=projekcija_id)
+
+    if request.method == 'POST':
+        if projekcija.capacity > Karta.objects.filter(seat=projekcija.capacity).count():
+            # Get the next available seat number
+            next_seat = Karta.objects.filter(seat=projekcija.capacity).count() + 1 - projekcija.capacity
+
+            # Get the user based on the provided user_id
+            user = User.objects.get(id=user_id)
+
+            # Create a new ticket for the specified user and projection
+            ticket = Karta(seat=next_seat, movie=projekcija, user=user)
+            projekcija.capacity =projekcija.capacity -1
+            projekcija.save() 
+            ticket.save()
+
+            return redirect('ticket_success')
+        else:
+            return render(request, 'ticket_sold_out.html')
+
+    return render(request, 'create_tickets.html', {'projekcija': projekcija})
+
+

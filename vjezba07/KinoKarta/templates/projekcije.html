@@ -1,0 +1,14 @@
+
+<h1>Sve projekcije</h1>
+<ul>
+  {% for projekcija in projekcije %}
+    <li>
+      Movie: {{ projekcija.movie }}
+      <br>
+      Time: {{ projekcija.time }}
+      <br>
+      Free seats: {{ projekcija.capacity }}
+    </li>
+    <br>
+  {% endfor %}
+</ul>

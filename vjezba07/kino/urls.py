@@ -25,6 +25,8 @@ urlpatterns = [
     path('KinoKarta/hello', views.say_hello),
     path('__debug__/', include('debug_toolbar.urls')),
     path('movie/', views.movies),
-    path('create/', views.create_movies)
-   
+    path('create/', views.create_movies),
+    path('movies/', views.sve_projekcije),
+    path('tickets/<int:user_id>/', views.user_tickets, name='user_tickets'),
+    path('create_tickets/<int:projekcija_id>/<int:user_id>', views.create_tickets, name='create_tickets'),
 ]

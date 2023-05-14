@@ -1,0 +1,9 @@
+<h1>Tickets for User: {{ user.username }}</h1>
+{% for ticket in tickets %}
+  <p>Movie: {{ ticket.projekcija.movie }}</p>
+  <p>Time: {{ ticket.projekcija.time }}</p>
+  <p>Seat: {{ ticket.seat }}</p>
+  <hr>
+{% empty %}
+  <p>No tickets found for this user.</p>
+{% endfor %}
