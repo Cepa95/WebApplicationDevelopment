@@ -28,5 +28,6 @@ urlpatterns = [
     path('create/', views.create_movies),
     path('movies/', views.sve_projekcije),
     path('tickets/<int:user_id>/', views.user_tickets, name='user_tickets'),
-    path('create_tickets/<int:projekcija_id>/<int:id>', views.create_tickets, name='create_tickets'),
+     path('decrease/<int:pk>/', views.decrease_capacity, name='decrease_capacity'),
+    # path('create_tickets/<int:projekcija_id>/<int:id>', views.create_tickets, name='create_tickets'),
 ]

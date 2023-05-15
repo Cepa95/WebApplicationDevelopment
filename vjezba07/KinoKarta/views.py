@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.http import HttpResponse
 from .models import Projekcija, Karta
@@ -50,27 +50,26 @@ def user_tickets(request, user_id):
     return render(request, 'tickets.html', context)
 
 
-def create_tickets(request, projekcija_id, id):
-    projekcija = Projekcija.objects.get(id=projekcija_id)
+from django.shortcuts import get_object_or_404, render, redirect
+from .models import Projekcija, Karta
+
+
+
+def decrease_capacity(request, pk):
+    # Retrieve the Projekcija object based on the primary key
+    projekcija = get_object_or_404(Projekcija, pk=pk)
 
     if request.method == 'POST':
-        if projekcija.capacity > Karta.objects.filter(movie=projekcija).count():
-            # Get the next available seat number
-            next_seat = Karta.objects.filter(movie=projekcija).count() + 1
-
-            # Get the user based on the provided user_id
-            user = User.objects.get(id=id)
-
-            # Create a new ticket for the specified user and projection
-            ticket = Karta(seat=next_seat, movie=projekcija, user=user)
+        if projekcija.capacity > 0:
+            # Decrease the capacity by one
             projekcija.capacity -= 1
             projekcija.save()
-            ticket.save()
 
-            return redirect('ticket_success')
+            # Redirect or render appropriate template
+            return redirect('/movies/')
         else:
-            return render(request, 'ticket_sold_out.html')
+            # Capacity is already full, handle accordingly
+            return render(request,'ticket_sold_out.html')
 
-    return render(request, 'create_tickets.html', {'projekcija': projekcija})
-
-
+    # Render the form template
+    return render(request, 'decrease.html', {'projekcija': projekcija})
