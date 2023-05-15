@@ -44,11 +44,15 @@ def sve_projekcije(request):
 def user_tickets(request, user_id):
     user = User.objects.get(id=user_id)
     tickets = Karta.objects.filter(user=user)
+    movies = Projekcija.objects.filter(id__in=tickets.values('movie_id'))
+
     context = {
         'user': user,
-        'tickets': tickets
+        'tickets': tickets,
+        'movies': movies
     }
     return render(request, 'tickets.html', context)
+
 
 
 def decrease_capacity(request, pk, user_id):
