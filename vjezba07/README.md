@@ -1,4 +1,4 @@
-                                                  Vježba 7  
+vjezba 7.   
 Izraditi Django aplikaciju za prodaju kino karata. Putem admin sucelja napraviti registraciju korisnika i 
 iskoristiti gotovu tablicu user koja dolazi sa Django-vim paketom auth. Izraditi modele Projekcija (ime 
 filma, vrijeme filma i kapacitet dvorane-broj sjedala) i Karta (broj sjedala) i postaviti ih u odgovarajuće 
