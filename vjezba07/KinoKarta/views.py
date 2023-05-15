@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from .models import Projekcija, Karta
 from django.contrib.auth.models import User
 from .forms import ProjekcijaForm
+from django.db.models import Max
 # Create your views here.
 
 # def say_hello(request):
@@ -49,22 +50,21 @@ def user_tickets(request, user_id):
     return render(request, 'tickets.html', context)
 
 
-
-def create_tickets(request, projekcija_id, user_id):
+def create_tickets(request, projekcija_id, id):
     projekcija = Projekcija.objects.get(id=projekcija_id)
 
     if request.method == 'POST':
-        if projekcija.capacity > Karta.objects.filter(seat=projekcija.capacity).count():
+        if projekcija.capacity > Karta.objects.filter(movie=projekcija).count():
             # Get the next available seat number
-            next_seat = Karta.objects.filter(seat=projekcija.capacity).count() + 1 - projekcija.capacity
+            next_seat = Karta.objects.filter(movie=projekcija).count() + 1
 
             # Get the user based on the provided user_id
-            user = User.objects.get(id=user_id)
+            user = User.objects.get(id=id)
 
             # Create a new ticket for the specified user and projection
             ticket = Karta(seat=next_seat, movie=projekcija, user=user)
-            projekcija.capacity =projekcija.capacity -1
-            projekcija.save() 
+            projekcija.capacity -= 1
+            projekcija.save()
             ticket.save()
 
             return redirect('ticket_success')
