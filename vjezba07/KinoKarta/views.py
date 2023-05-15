@@ -54,7 +54,6 @@ def user_tickets(request, user_id):
     return render(request, 'tickets.html', context)
 
 
-
 def decrease_capacity(request, pk, user_id):
     # Retrieve the Projekcija object based on the primary key
     projekcija = get_object_or_404(Projekcija, pk=pk)
@@ -68,7 +67,6 @@ def decrease_capacity(request, pk, user_id):
             
             karta = Karta(seat=projekcija.capacity, movie=projekcija, user=user)
             karta.save()
-
             # Redirect or render appropriate template
             return redirect('/movies/')
         else:
@@ -102,6 +100,5 @@ def delete_ticket(request, user_id, movie_id):
             'movie_id': movie_id,
         }
         return render(request, 'no_ticket.html', context)  # Render a template for not found case
-
     # If no exception occurred and the ticket was not found, redirect to appropriate page
     return redirect('/movies/')
