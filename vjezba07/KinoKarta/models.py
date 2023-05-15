@@ -12,7 +12,7 @@ class Projekcija(models.Model):
 
 
 class Karta(models.Model):
-    seat = models.IntegerField()
+    seat = models.IntegerField(default=0)
     movie = models.ForeignKey(Projekcija, blank = True, null = True, on_delete = models.CASCADE)
     user = models.ForeignKey(User, blank = True, null = True, on_delete = models.CASCADE)
 

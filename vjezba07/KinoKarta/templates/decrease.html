@@ -1,8 +1,9 @@
 <h2>Decrease Capacity</h2>
 <p>Movie: {{ projekcija.movie }}</p>
 <p>Capacity: {{ projekcija.capacity }}</p>
+<p>User: {{user_id}}</p>
 
-<form method="POST" action="{% url 'decrease_capacity' projekcija.id %}">
+<form method="POST" action="{% url 'decrease_capacity' projekcija.id user_id %}">
   {% csrf_token %}
   <button type="submit">Decrease Capacity</button>
 </form>
