@@ -21,6 +21,11 @@ def add_user(request):
                                              first_name=first_name, last_name=last_name,
                                              email=email, role=role, status=status)
         # Additional processing or redirect to a success page
-        return redirect('success_page')
+        return redirect('/success/')
 
     return render(request, 'add_user.html')
+
+
+
+def success(request):
+    return render(request, 'success.html')

@@ -16,13 +16,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from vjezba8.views import add_user
+from vjezba8.views import add_user,success
 from django.conf import settings
 from django.conf.urls.static import static
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('add_user/', add_user, name='add_user'),
+    path('success/', success, name='success'),
 ]
 
 
