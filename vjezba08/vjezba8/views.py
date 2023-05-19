@@ -1,7 +1,19 @@
 from django.shortcuts import render, redirect
 from .models import Korisnici
+from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth import logout
+from django.urls import reverse
 # Create your views here.
 
+
+
+
+def check_admin(user):
+    return user.role == 'administrator'
+
+
+@login_required
+@user_passes_test(check_admin)
 def add_user(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -27,5 +39,33 @@ def add_user(request):
 
 
 
-def success(request):
-    return render(request, 'success.html')
+# def success(request):
+#     return render(request, 'success.html')
+
+
+
+# def success_student(request):
+#     return render(request, 'success_student.html')
+
+
+@login_required
+def success_login(request):
+    user = request.user
+    if user.role == 'administrator':
+        return render(request, 'success.html', {'user': user})
+    elif user.role == 'student':
+        return render(request, 'success_student.html', {'user': user})
+    else:
+        return render(request, 'success.html', {'user': user})   
+
+
+
+
+
+@login_required
+def logout_view(request):
+    if request.method == 'POST':
+        logout(request)
+        return redirect(reverse('login'))
+    else:
+        return render(request, 'logout.html')

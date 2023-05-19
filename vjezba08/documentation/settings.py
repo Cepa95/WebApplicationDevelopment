@@ -29,6 +29,14 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+# DEBUG = False
+# ALLOWED_HOSTS = ['127.0.0.1']
+
+
+
+
+
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -101,6 +109,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTH_USER_MODEL = 'vjezba8.Korisnici'
+LOGIN_REDIRECT_URL = '/success/'
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
