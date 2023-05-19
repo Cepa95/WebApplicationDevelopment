@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add User</title>
+</head>
+<body>
+    <h2>Add User</h2>
+    {% if error_message %}
+        <p>{{ error_message }}</p>
+    {% endif %}
+    <form method="post" action="{% url 'add_user' %}">
+        {% csrf_token %}
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required><br><br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br><br>
+        <label for="repeat_password">Repeat Password:</label>
+        <input type="password" id="repeat_password" name="repeat_password" required><br><br>
+        <label for="first_name">First Name:</label>
+        <input type="text" id="first_name" name="first_name" required><br><br>
+        <label for="last_name">Last Name:</label>
+        <input type="text" id="last_name" name="last_name" required><br><br>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br><br>
+        <label for="role">Role:</label>
+        <select id="role" name="role" required>
+            <option value="administrator">Administrator</option>
+            <option value="profesor">Profesor</option>
+            <option value="student">Student</option>
+        </select><br><br>
+        <label for="status">Status:</label>
+        <select id="status" name="status" required>
+            <option value="none">None</option>
+            <option value="redovan">Redovan</option>
+            <option value="izvanredan">Izvanredan</option>
+        </select><br><br>
+        <input type="submit" value="Add User">
+    </form>
+</body>
+</html>

@@ -16,7 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from vjezba8.views import add_user
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('add_user/', add_user, name='add_user'),
 ]
